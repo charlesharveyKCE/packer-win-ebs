@@ -24,6 +24,6 @@
         }
     ],
     "variables": {
-        "source_ami": "ami-ab928fc8"
+        "source_ami": " "
     }
 }

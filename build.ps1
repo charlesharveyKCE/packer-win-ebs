@@ -1,7 +1,7 @@
 Param(
     [ValidateSet(
         "Windows2012r2", 
-        "WindowsServer2016"
+        "Windows2016"
     )]
     [string]
     $OSName,
@@ -40,4 +40,4 @@ $amiMap = @{
 
 $source_ami = $amiMap[$OSName][$Region]
 
-packer build --var-file .\credentials.json -var os_name=$OSname -var source_ami=$source_ami .\template.json
+packer build -var-file .\credentials.json -var os_name=$OSname -var source_ami=$source_ami .\template.json
