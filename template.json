@@ -1,0 +1,29 @@
+{
+    "builders": [{
+        "access_key" : "{{ user `aws_access_key`}}",
+        "secret_key" : "{{ user `aws_secret_key`}}",
+        "type": "amazon-ebs",
+        "region": "ap-southeast-2",
+        "source_ami": "{{ user `source_ami`}}",
+        "instance_type": "m3.medium",
+        "ami_name": "{{ user `os_name`}}-{{timestamp}}",
+        "user_data_file":".\\scripts\\ec2-userdata.ps1",
+        "communicator": "winrm",
+        "winrm_username": "Administrator",
+        "winrm_use_ssl": true,
+        "winrm_insecure": true
+    }],
+    "provisioners": [
+        {
+            "type": "chef-solo",
+            "cookbook_paths": ["cookbooks"],
+            "guest_os_type": "windows",
+            "run_list": [
+                "webserver::webserver"
+            ]
+        }
+    ],
+    "variables": {
+        "source_ami": "ami-ab928fc8"
+    }
+}
